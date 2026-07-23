@@ -1,0 +1,134 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="uGGE_yWtWsY6kKMJfTVx">
+    <mxGraphModel dx="1222" dy="705" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="P3M user" vertex="1">
+          <mxGeometry height="60" width="30" x="20" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;" value="Browser&lt;div&gt;(Responsive)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-17" parent="1" style="swimlane;" value="Frontend" vertex="1">
+          <mxGeometry height="380" width="236" x="180" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-3" parent="ZWaESDLm4vkDxm213lgQ-17" style="whiteSpace=wrap;html=1;aspect=fixed;" value="Reverse Proxy" vertex="1">
+          <mxGeometry height="60" width="60" x="88" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-4" parent="ZWaESDLm4vkDxm213lgQ-17" style="rounded=0;whiteSpace=wrap;html=1;" value="React + OpenLayers App" vertex="1">
+          <mxGeometry height="50" width="106" x="65" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-27" edge="1" parent="ZWaESDLm4vkDxm213lgQ-17" source="ZWaESDLm4vkDxm213lgQ-4" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-70" y="410" as="sourcePoint" />
+            <mxPoint x="-20" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-18" parent="1" style="swimlane;" value="Backend" vertex="1">
+          <mxGeometry height="380" width="236" x="416" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-5" parent="ZWaESDLm4vkDxm213lgQ-18" style="rounded=0;whiteSpace=wrap;html=1;" value="Django + DRF" vertex="1">
+          <mxGeometry height="60" width="120" x="58" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-7" parent="ZWaESDLm4vkDxm213lgQ-18" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Cache_Redis_Product.svg;" value="Caching" vertex="1">
+          <mxGeometry height="50" width="59.52" x="88.24000000000001" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-29" edge="1" parent="ZWaESDLm4vkDxm213lgQ-18" source="ZWaESDLm4vkDxm213lgQ-7" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="ZWaESDLm4vkDxm213lgQ-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-26" y="290" as="sourcePoint" />
+            <mxPoint x="118" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-8" parent="ZWaESDLm4vkDxm213lgQ-18" style="rounded=0;whiteSpace=wrap;html=1;" value="GeoNode SDI&lt;div&gt;(GeoSGB)&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="58" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-44" edge="1" parent="ZWaESDLm4vkDxm213lgQ-18" source="ZWaESDLm4vkDxm213lgQ-5" style="endArrow=none;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-8" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="-26" y="290" as="sourcePoint" />
+            <mxPoint x="24" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-45" connectable="0" parent="ZWaESDLm4vkDxm213lgQ-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST API" vertex="1">
+          <mxGeometry relative="1" x="-0.0167" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-19" parent="1" style="swimlane;" value="Data Layer" vertex="1">
+          <mxGeometry height="380" width="236" x="652" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-32" connectable="0" parent="ZWaESDLm4vkDxm213lgQ-19" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="70" x="83" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-6" parent="ZWaESDLm4vkDxm213lgQ-32" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="PostgreSQL&lt;div&gt;PostGIS&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-24" parent="ZWaESDLm4vkDxm213lgQ-32" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="P3M Data" vertex="1">
+          <mxGeometry height="30" width="60" x="5" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-33" connectable="0" parent="ZWaESDLm4vkDxm213lgQ-19" style="group" value="" vertex="1">
+          <mxGeometry height="110" width="80" x="78" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-21" parent="ZWaESDLm4vkDxm213lgQ-33" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="PostgreSQL&lt;div&gt;PostGIS&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="70" x="3" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-25" parent="ZWaESDLm4vkDxm213lgQ-33" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="P3M Layers" vertex="1">
+          <mxGeometry height="30" width="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-30" parent="ZWaESDLm4vkDxm213lgQ-19" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" value="PostgreSQL&lt;div&gt;PostGIS&lt;/div&gt;" vertex="1">
+          <mxGeometry height="80" width="70" x="81" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-31" parent="ZWaESDLm4vkDxm213lgQ-19" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="GeoSGB Layers" vertex="1">
+          <mxGeometry height="30" width="80" x="78" y="337" as="geometry" />
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-26" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-4" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-5" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="364" y="155" as="sourcePoint" />
+            <mxPoint x="414" y="105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-38" connectable="0" parent="ZWaESDLm4vkDxm213lgQ-26" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="REST API" vertex="1">
+          <mxGeometry relative="1" x="-0.1567" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-35" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-1" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="ZWaESDLm4vkDxm213lgQ-2" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="320" as="sourcePoint" />
+            <mxPoint x="110" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-36" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-2" style="endArrow=none;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="ZWaESDLm4vkDxm213lgQ-3" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="320" as="sourcePoint" />
+            <mxPoint x="440" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-40" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-8" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="652" y="510" as="sourcePoint" />
+            <mxPoint x="702" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-41" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-8" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-21" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="320" as="sourcePoint" />
+            <mxPoint x="440" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-42" edge="1" parent="1" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="ZWaESDLm4vkDxm213lgQ-30" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="600" y="120" as="sourcePoint" />
+            <mxPoint x="440" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ZWaESDLm4vkDxm213lgQ-43" edge="1" parent="1" source="ZWaESDLm4vkDxm213lgQ-5" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ZWaESDLm4vkDxm213lgQ-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="390" y="320" as="sourcePoint" />
+            <mxPoint x="720" y="220" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
