@@ -107,11 +107,15 @@ The core development of P3M is being carried out by the UFLA (Federal University
     \end{center}
 \end{figure}
 
-It has a crucial role in planning mineral research and production, generating qualified knowledge that is essential to support strategic decisions in both the public and private sectors. For industries and investors in the mining sector, the data available on the Platform contribute to supporting development plans and the exploitation of mineral deposits. Government entities also benefit primarily from information for monitoring the competitiveness of mineral research and production, thereby promoting greater attractiveness of investments for national development.
+It has a crucial role in planning mineral research and production, generating qualified knowledge that is essential to support strategic decisions in both the public and private sectors. For industries and investors in the mining sector, the data available on the Platform contribute to supporting development plans and the exploitation of mineral deposits. 
+
+Government entities also benefit primarily from information for monitoring the competitiveness of mineral research and production, thereby promoting greater attractiveness of investments for national development.
 
 In short, P3M provides information free of charge through two main environments: (i) a map and data viewer that integrates geoscientific, economic, environmental and legal information, mining rights, among others, from various national and governmental entities; and (ii) a dashboard system with statistical data presentation, with filters by territorial unit (e.g., region, state, or municipality) and commodity \cite{almeida2025}.
 
-One of the main differentiators of the P3M platform, among the various software products of SGB, is its complete conception and development using FOSS4G. The main objective of this work is to present the solution architecture used in the development, focusing primarily on the use of FOSS4G projects. In early February of this year, version 2.4.4 was released, with several improvements in terms of user experience and performance.
+One of the main differentiators of the P3M platform, among the various software products of SGB, is its complete conception and development using FOSS4G. 
+
+The main objective of this work is to present the solution architecture used in the development, focusing primarily on the use of FOSS4G projects. In early February of this year, version 2.4.4 was released, with several improvements in terms of user experience and performance.
 
 
 \section{System Architecture}\label{SYSTEM_ARCHITECTURE}
@@ -128,7 +132,7 @@ In general terms, the P3M Platform can be subdivided into three main components:
 
 The platform's deployment is entirely cloud-ready, provisioned on a on-premise OpenShift Cluster \cite{redhatopenshift} with all implemented security restrictions inside the platform. In other words, all P3M pods run with a random UUID and limited capacities, which improves security. The Kubernetes resources are provisioned with use of Helm Charts \cite{helm2016}. An active CI/CD pipeline is under development at this moment.
 
-The data storage relies on PostgreSQL 14 databases with PostGIS 3.4 \cite{postgis} and NFS servers for raster layers storage. In last quarter of 2026, a database upgrade is scheduled to superseed PostgreSQL version to 17. PostGIS will remain in the same version, because of requirements of parallel projects running inside te DBMS server.
+The data storage relies on PostgreSQL 14 databases with PostGIS 3.4 \cite{postgis} and NFS servers for raster layers storage. In last quarter of 2026, a database upgrade is scheduled to superseed PostgreSQL version to 17. PostGIS will remain in the same version, because of requirements of parallel projects running inside the DBMS server.
 
 
 \subsection{Web Map and Dashboards}\label{sec:WEB_MAP_AND_DASHBOARDS}
@@ -137,7 +141,7 @@ The map and dashboard applications are deployed into two container images: the f
 
 To accelerate the delivery of structured data to the REST API, a Memcached deployment was provisioned to store indicator's cached results. This service is implemented natively within the Django framework \cite{django_memcached} and is optional, though recommended for improving API performance.
 
-All these services uses Kubernetes Deployment objects due to their stateless nature (Figure~\ref{fig:p3m_frontend_k8s}). Additionally, a HorizontalPodAutoscaler can optionally be provided via a Helm chart — alongside the Deployment, Service, and Ingress objects—for each frontend and backend pods to ensure horizontal scalability for the services.
+All these services uses Kubernetes Deployment objects due to their stateless nature (Figure~\ref{fig:p3m_frontend_k8s}). Additionally, a HorizontalPodAutoscaler can optionally be provided via a Helm chart — alongside the Deployment, Service, and Ingress objects - for each frontend and backend pods to ensure horizontal scalability for the services.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -147,44 +151,92 @@ All these services uses Kubernetes Deployment objects due to their stateless nat
     \end{center}
 \end{figure}
 
-This system does not require persistent disk provisioning for data storage; data files—typically geophysical grids in GeoTIFF format—are hosted on the SGB's GeoNode. Only a ephemeral storage, provided by a NFS server is used to provide static files generated by Django and expose as a read-only mount to the frontend pod.
+This system does not require persistent disk provisioning for data storage; data files, typically geophysical grids in GeoTIFF format, are hosted on the SGB's GeoNode. Only a ephemeral storage, provided by a NFS server is used to provide static files generated by Django and expose as a read-only mount to the frontend pod.
 
-Furthermore, the application has an administrative interface based on the Django Admin framework,that allows for modifying various application behaviors, as well as registering, editing, and deleting WMS and WFS-compatible layers; describing column attributes and metadata info and links. It also can manage definitions regarding mineral resources, mining clusters, and layer groups organized by mineral substance or commodity.
+Furthermore, the application has an administrative interface based on the Django Admin framework (Figure~\ref{fig:p3m_admin_interface}), that allows for modifying various application behaviours, as well as registering, editing, and deleting WMS and WFS-compatible layers, describing column attributes and metadata info and links. 
 
-The front-end component is a TypeScript application that relies on libraries such as OpenLayers \cite{openlayers} and Chart.JS \cite{chartjs} to render the layer tree, delivered by the backend, and the dashboard data into cards and charts. This application were transpiled to Javascript and hosted in nginx web server. \cite{reese2008linux}.
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[width=1.0\columnwidth]{images/p3m_admin_interface.png}
+        \caption{P3M Admin interface}
+        \label{fig:p3m_admin_interface}
+    \end{center}
+\end{figure}
+
+It also can manage definitions regarding mineral resources, mining clusters, and layer groups organized by mineral substance or commodity.
+
+The front-end component is a TypeScript application that relies on libraries such as OpenLayers \cite{openlayers} and Chart.JS \cite{chartjs} to render the layer tree, delivered by the backend, and the dashboard data into cards (Figure~\ref{fig:case-study-copper-rs-dashboard1}) and charts (Figure ~\ref{fig:case-study-copper-rs-dashboard2}). This application also offeres basic GIS workflow like zoon, pan, feature attributes operations, etc. This application were transpiled to Javascript and hosted in nginx web server. \cite{reese2008linux}.
+
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[width=1.0\columnwidth]{images/cobre-rs-dashboard1.png}
+        \caption{Dashboard's Cards section, with insights for mineral industry on P3M.}
+        \label{fig:case-study-copper-rs-dashboard1}
+    \end{center}
+\end{figure}
+
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[width=1.0\columnwidth]{images/cobre-rs-dashboard2.png}
+        \caption{Dashboard's Charts section, with insights for mineral industry on P3M.}
+        \label{fig:case-study-copper-rs-dashboard2}
+    \end{center}
+\end{figure}
 
 
 \subsection{Data Pipeline System}\label{sec:DATA_PIPELINE_SYSTEM}
 
 The data pipeline orchestration environment was deployed from a custom Apache Airflow \cite{apacheairflow} container image, supplemented with libraries such as GDAL \cite{gdal} and Apache Arrow/GeoParquet \cite{geoparquet}.
 
-(Figure~\ref{fig:p3m_airflow_schema})
+Apache Airflow, provisioned internally within the SGB data center, supports all the needs of the SGB Spatial Data Infrastructure by generating periodic extracts from institutional databases and handling routine tasks such as database index maintenance and forced cache updates for GeoNode's embedded GeoServer. Routines associated with P3M were incorporated and maintained via separate Git repository linked to the DAGs directory.
+
+For P3M, these data pipelines represented as Directed Acyclic Graphs (DAGs), were developed to collect data of mining processes and financial compensation – available from the National Mining Agency (ANM) website. 
+
+Currently, these DAGs run on Mondays, Wednesdays, and Fridays and are crucial for maintaining the dashboards and P3M's authorial layers, like active mines, commodity associations, and mining process statuses. These DAGs has the same logic process, as briefly described in Figure~\ref{fig:p3m_airflow_schema}.
 
 \begin{figure}[ht!]
     \begin{center}
         \includegraphics[width=1.0\columnwidth]{images/Airflow_DAG_flux.drawio.png}
-        \caption{Simplified outline of the tasks required for Brazilian mining data ETL process, implemented as Apache Airflow DAGs}
+        \caption{Summarized outline of the tasks required for Brazilian mining data ETL process, implemented as Apache Airflow DAGs}
         \label{fig:p3m_airflow_schema}
     \end{center}
 \end{figure}
 
-For P3M, some data pipelines were developed to collect data of mining processes and financial compensation – available from the National Mining Agency (ANM). This data, originally delivered in spreadsheets and File Geodatabases, is sanitized, enriched, and transformed using GDAL, and finally saved in proprietary PostgreSQL/PostGIS tables of active mines, commodity associations, and mining process statuses. Currently, these pipelines run on Mondays, Wednesdays, and Fridays and are crucial for maintaining the dashboards and authorial layers.
+The SGB's Apache Airflow instance is deployed in a separated 5-node Docker Swarm, separated from the Kubernetes cluster where P3M is installed, and utilizes three containers acting as workers for DAG runs. These containers feature a custom configuration that includes GDAL 3.12.2 compiled with specific drivers for SGB operations, such as Apache Arrow \cite{apachearrow}, enabling the reading and writing of Arrow and (Geo)Parquet files. The source code for building the container images is available at \url{https://github.com/nds-cprm/airflow-spatial}.
+
+These DAGs were designed using the Medallion architecture \cite{medallion}, with creation of Bronze, Silver, and Gold data stores: data is extracted and saved in its original format — typically Excel spreadsheets, CSV files, and ESRI\textregistered~ File Geodatabases. For each saved dataset, an SHA256 hash file is generated to verify content integrity and identify changes in the downloaded databases between the current and previous executions.
+
+If SHA256 hash of the downloaded content changes, a data cleaning process is initiated using GeoPandas \cite{geopandas} routines to select, organize, and verify the content's integrity. This cleaned data is saved in Apache GeoParquet format and made available on an NFS file server for loading into the "Gold" database via `ogr2ogr` executions.
+
+Following the recording process, certain table maintenance routines are triggered; additionally, if the content has changed, the embedded GeoServer cache tiles are reseeded to lower levels and the remaining higher levels are excluded. Whenever a pipeline execution fails, the result from the previous pipeline is retained, and an email is sent to the P3M and SGB SDI administrators to notify them of the incident.
 
 
 \subsection{Underlying Spatial Data Infrastructure}\label{sec:UNDERLYING_SPATIAL_DATA_INFRASTRUCTURE}
 
-The provision of maps and metadata on P3M strictly follows the use of OGC Open Web Services standards, such as WMS, WMTS, and WFS, and the platform consumes maps and metadata from a GeoNode \cite{geonode_contributors} installation owned by the SGB \cite{mota2024}, in order to fulfill the role of Spatial Data Infrastructure.
+The provision of maps and metadata on P3M strictly follows the use of OGC Open Web Services standards, such as WMS, WMTS, WFS and CSW, and the platform consumes maps and metadata from a GeoNode \cite{geonode_contributors} installation owned by the SGB \cite{mota2024}, in order to fulfil the role of Spatial Data Infrastructure Figure~\ref{fig:opendata_sgb}.
 
-The SGB’s GeoNode was deployed to a production environment in late 2025, initially to support this platform. Before this GeoNode, P3M had a dedicated GeoServer instance in its own workspace to serve the maps. After going into production, all layers and configurations were moved to this GeoNode. Currently, about 320 vector and raster layers are cataloged and registered from various Brazilian government data sources. Initially, this data was organized and cleaned to create a database that was placed as a datastore in GeoNode's GeoServer.
+\begin{figure}[ht!]
+    \begin{center}
+        \includegraphics[width=1.0\columnwidth]{images/opendata_sgb.png}
+        \caption{GeoNode-based Spatial Data Infrastructure of the Geological Service of Brazil}
+        \label{fig:opendata_sgb}
+    \end{center}
+\end{figure}
 
-The option of hosting duplicate data instead of consuming OGC services from other institutions was chosen due to the need to have these data available on the platform, even if the source provider is unavailable, in addition to the geological service having a robust IT infrastructure. The P3M authorial layers are also hosted on GeoNode, but directly from the exposure of the spatial tables to the GeoNode/Geoserver. Some of these tables, such as mineral resource data and systematic mapping, are also fed from airflow pipelines.
+The SGB’s GeoNode was deployed to a production environment in late 2025 in the same OpenShift Cluster, initially to support this platform. Before this GeoNode, P3M had a dedicated GeoServer instance in its own workspace to serve the maps. After going into production, all layers and configurations were moved to this GeoNode. 
+
+Until the released version, about 320 vector and raster layers are catalogued and registered from various Brazilian government data sources. Initially, this data was organized and cleaned to create a database that was placed as a data store in GeoNode's GeoServer.
+
+The option of hosting duplicate data instead of consuming OGC services from other institutions was chosen due to the need to have these data available on the platform, even if the source provider is unavailable, in addition to the geological service having a robust IT infrastructure. All of these data are static which implicates to make it available as a simple copy process, with no need to write dags for it.
+
+The P3M authorial layers are also hosted on GeoNode, but directly from the exposure of the spatial tables to the GeoNode's embedded Geoserver. Some of these tables, such as mineral resource data and systematic geological mapping, are also fed from airflow DAGs.
 
 
 \section{Case Study – Copper Research on Southern Brazil}\label{CASE_STUDY_COPPER_SOUTHERN_BRAZIL}
 
 A typical case use of P3M applied to mineral resource prospecting, cited as an example, was first published by \cite{barbosajunior2025}. This example will simulate an information gathering activity on copper in the state of Rio Grande do Sul, to evaluate potential areas for new research applications for this mineral substance.
 
-The approach involves on platform navigation, starting from the side panel, on "Main Class of Commodities", select metallic minerals $>$ Copper (Cu). From this selection, specific geospatial layers are activated, such as active mines, current mining rights, geological, geochemical and geophysical surveys, as well as occurrences and deposits mapped by the Geological Survey of Brazil (Figure~\ref{fig:case-study-copper-rs}).
+The approach involves on platform navigation, starting from the side panel, on "Main Class of Commodities", select metallic minerals $>$ Copper (Cu), as described in Figure~\ref{fig:case-study-copper-rs}. 
 
 \begin{figure}[ht!]
     \begin{center}
@@ -194,9 +246,11 @@ The approach involves on platform navigation, starting from the side panel, on "
     \end{center}
 \end{figure}
 
-Após a seleção......
+From this selection, specific geospatial layers are activated, such as active mines, current mining rights, geological, geochemical and geophysical surveys, as well as occurrences and deposits mapped by the Geological Survey of Brazil. This shows a regional panorama for area selection.
 
-In the specific case of Rio Grande do Sul, this information allowed for the identification of areas with a higher density of occurrences and geological indicators favorable to the presence of copper. Based on the preliminary geological analysis, it is possible to delineate regions of interest for research, evaluating their overlap with active mining rights and checking their legal availability.
+In the specific case of Rio Grande do Sul, this information allowed for the identification of areas with a higher density of occurrences and geological indicators favourable to the presence of copper. 
+
+Based on the preliminary geological analysis, it is possible to delineate regions of interest for research, evaluating their overlap with active mining rights and checking their legal availability.
 
 The platform also allows for the activation of layers of legal and socio-environmental restrictions, such as indigenous lands, conservation units, settlement areas, and critical infrastructure, helping to exclude areas that are not suitable for applications (Figure~\ref{fig:case-study-copper-rs-support-layers}).
 
@@ -208,32 +262,23 @@ The platform also allows for the activation of layers of legal and socio-environ
     \end{center}
 \end{figure}
 
-Beyond the geological and legal aspects, the platform allows the user to examine logistical and market elements, such as transport infrastructure, ports, electricity grid, and the presence of consumer industries, providing input for a preliminary assessment of economic viability.
+Beyond the geological and legal aspects, the platform allows the user to examine logistical and market elements, such as transport infrastructure, ports, electricity grid, and the presence of consumer industries, providing input for a preliminary assessment of economic viability. 
 
-P3M's integrated statistics functionality also provides data on the evolution of copper requirements, the geoeconomic potential index of the substance, and the distribution of mining titles by process phase (Figures~\ref{fig:case-study-copper-rs-dashboard1} and~\ref{fig:case-study-copper-rs-dashboard2}).
-
-\begin{figure}[ht!]
-    \begin{center}
-        \includegraphics[width=1.0\columnwidth]{images/cobre-rs-dashboard1.png}
-        \caption{Card section, with insights for mineral industry on P3M's dashboards.}
-        \label{fig:case-study-copper-rs-dashboard1}
-    \end{center}
-\end{figure}
-
-\begin{figure}[ht!]
-    \begin{center}
-        \includegraphics[width=1.0\columnwidth]{images/cobre-rs-dashboard2.png}
-        \caption{Chart section, with insights for mineral industry on P3M's dashboards.}
-        \label{fig:case-study-copper-rs-dashboard2}
-    \end{center}
-\end{figure}
+P3M's integrated statistics functionality also provides data on the evolution of copper requirements, the geoeconomic potential index of the substance, and the distribution of mining titles by process phase. The application offers some substantial data exhibited as cards and charts. This cards and charts could be selected and saved in bowser's SessionStorage, and should show the regional panorama of economic availability for copper prospection.
 
 
 \section{Conclusion}\label{CONCLUSION}
 
-Finally, the P3M Platform, since its conception, has always been guided by the use of free and open-source libraries and frameworks to ensure transparency and interoperability. Alongside major FOSS4G projects, P3M stands out among the select group of data and service providers applied to Geology and Mining sectors by adopting frameworks that are free from restrictive licensing and bundled sales practices.
+The Mineral Research and Production Planning Support Platform (P3M), since its conception, has always been guided by the use of free and open-source libraries and frameworks to ensure transparency and interoperability. Alongside major FOSS4G projects, P3M stands out among the select group of data and service providers applied to Geology and Mining sectors by adopting frameworks that are free from restrictive licensing and bundled sales practices.
 
-This study demonstrates that P3M is a robust tool for providing technical support to mineral research, especially in its initial phase, helping to select areas carefully and contributing to more efficient and informed decisions by investors and researchers \cite{carli2024}.
+In short, the P3M has established itself as an indispensable strategic tool for modernizing Brazil's mineral value chain. By acting as an information hub — a "one-stop shop" — it overcomes the challenge of data fragmentation, integrating geoscientific, socioeconomic, environmental, and legal knowledge into a single, accessible environment.
+
+The project's key differentiator lies in its architecture, which is based entirely in FOSS4G; this ensures not only data transparency and interoperability but also independence from restrictive proprietary licensing and bigger lifetime cycle. This technological choice, combined with the use of international standards (OGC), guarantees a robust platform capable of supporting complex decision-making in both the public and private sectors \cite{carli2024}.
+
+The effectiveness of P3M is evidenced by its ability to attract investment and foster sustainable development, facilitating the identification of promising areas, as demonstrated in the case of copper in Rio Grande do Sul, and supporting fundamental studies for the SGB, such as the State Geoeconomic Studies (EGEs) \cite{sgb_economia_mineral}.
+
+Finally, the commitment to continuous development, including the implementation of metadata catalogs and even more interactive dashboards, signals that P3M will continue to evolve as a pillar of technological innovation. Thus, the platform not only boosts the competitiveness of the Brazilian mining sector but also sets a new standard for accessibility and accountability in the management of the country's mineral resources.
+
 
 % References
 {
