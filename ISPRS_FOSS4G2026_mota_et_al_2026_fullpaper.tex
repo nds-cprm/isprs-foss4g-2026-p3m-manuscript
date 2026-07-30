@@ -18,7 +18,6 @@
 \usepackage[british]{babel} 
 \usepackage[hang]{footmisc}
 \usepackage{graphicx} % Pacote necessário para imagens
-\usepackage{url}  % URL handle
 \def\footnotemargin{1em} % added 08-01-2020 Dennis Wittich
 
 %\usepackage[authoryear]{natbib}
@@ -97,7 +96,7 @@ The P3M Platform, developed by the Brazilian Geological Survey (SGB), is a strat
 
 The Mineral Research and Production Support Platform (P3M) was conceived and is being implemented by a team of specialists from the Geological Survey of Brazil (SGB), with the support and participation of public and private entities directly or indirectly related to the Brazilian mineral industry, such as: Secretariat of Geology, Mining and Mineral Transformation (SGM) of the Ministry of Mines and Energy (MME); National Mining Agency (ANM); Agency for the Development and Innovation of the Brazilian Mineral Sector (ADIMB); Brazilian Association of Mineral Research and Mining Companies (ABPM); National Association of Aggregate Producers for Construction (ANEPAC); Brazilian Institute of Geography and Statistics (IBGE), and Brazilian Mining Institute (IBRAM).
 
-The core development of P3M is being carried out by the UFLA (Federal University of Lavras) Agency for Innovation in Geotechnologies and Intelligent Systems (Zetta). Launched in late 2022, the P3M's main objective is to increase the attractiveness of investments and promote the sustainable development of the mineral industry, through the integration of data on mineral potential, infrastructure, costs, legislation, protected areas, and socioeconomic indicators of Brazil. The P3M's landing page (Figure~\ref{fig:p3m_architecture}) is hosted on \url{https://p3m.sgb.gov.br/} and has auto-translated versions in english and spanish.
+The core development of P3M is being carried out by the UFLA (Federal University of Lavras) Agency for Innovation in Geotechnologies and Intelligent Systems (Zetta). Launched in late 2022, the P3M's main objective is to increase the attractiveness of investments and promote the sustainable development of the mineral industry, through the integration of data on mineral potential, infrastructure, costs, legislation, protected areas, and socioeconomic indicators of Brazil. The P3M's landing page (Figure~\ref{fig:p3m_architecture}) is hosted on https://p3m.sgb.gov.br/ and has auto-translated versions in english and spanish.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -202,7 +201,7 @@ Currently, these DAGs run on Mondays, Wednesdays, and Fridays and are crucial fo
     \end{center}
 \end{figure}
 
-The SGB's Apache Airflow instance is deployed in a separated 5-node Docker Swarm, separated from the Kubernetes cluster where P3M is installed, and utilizes three containers acting as workers for DAG runs. These containers feature a custom configuration that includes GDAL 3.12.2 compiled with specific drivers for SGB operations, such as Apache Arrow \cite{apachearrow}, enabling the reading and writing of Arrow and (Geo)Parquet files. The source code for building the container images is available at \url{https://github.com/nds-cprm/airflow-spatial}.
+The SGB's Apache Airflow instance is deployed in a separated 5-node Docker Swarm, separated from the Kubernetes cluster where P3M is installed, and utilizes three containers acting as workers for DAG runs. These containers feature a custom configuration that includes GDAL 3.12.2 compiled with specific drivers for SGB operations, such as Apache Arrow \cite{apachearrow}, enabling the reading and writing of Arrow and (Geo)Parquet files. The source code for building the container images is available at https://github.com/nds-cprm/airflow-spatial.
 
 These DAGs were designed using the Medallion architecture \cite{medallion}, with creation of Bronze, Silver, and Gold data stores: data is extracted and saved in its original format — typically Excel spreadsheets, CSV files, and ESRI\textregistered~ File Geodatabases. For each saved dataset, an SHA256 hash file is generated to verify content integrity and identify changes in the downloaded databases between the current and previous executions.
 
